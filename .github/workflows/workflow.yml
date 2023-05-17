@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow on pull requests targeting the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Run the job on the latest version of Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Check out the repository's code
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2  # Set up the desired JDK version
+
+      - name: Build
+        run: ./gradlew assemble  # Run the build command
+
+      - name: Test
+        run: ./gradlew test  # Run the test command
